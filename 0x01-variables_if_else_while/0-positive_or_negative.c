@@ -2,7 +2,6 @@
 #include <time.h>
 /* more headers goes there */
 #include <stdio.h>
-
 /* betty style doc for function main goes there */
 /**
  * main = main function
@@ -22,6 +21,6 @@ int main(void)
 		printf("%d ia zero", n);
 	else is (n < 0)
 		printf("%d is negative", n);
-	printf("\n")
+	printf("\n");
 	return (0);
 }
