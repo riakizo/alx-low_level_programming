@@ -24,8 +24,4 @@ dest[i] = src[i];
 dest[i] = '\0';
 return (dest);
 }
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-Terms
 
