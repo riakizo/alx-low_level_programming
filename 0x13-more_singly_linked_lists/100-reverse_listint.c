@@ -17,7 +17,7 @@ listint_t *behind = NULL, *tmpd = NULL, *recent = *head;
 	behind = recent->next;
 	recent->next = NULL;
 
-	while (next_dest)
+	while (behind)
 	{
 		tmpd = behind->next;
 		behind->next = recent;
