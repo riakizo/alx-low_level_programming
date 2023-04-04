@@ -11,31 +11,33 @@
 *         Otherwise - the address of the new node.
 */
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
-{
-listint_t *new, *copy = *head;
-unsigned int node;
+{unsigned int i;
+	listint_t *recent, *new;
 
-new malloc(sizeof(listint_t));
-if (new == NULL)
-return (NULL);
-
-new->n = n;
-
-if (idx == 0)
-{
-new->next = copy;
-*head = new;
-return (new);
+	if (head == NULL)
+		return (NULL);
+	if (idx != 0)
+	{
+		recent = *head;
+		for (i = 0; i < idx - 1 && recent != NULL; i++)
+		{
+			recent = recent->next;
+		}
+		if (recent == NULL)
+			return (NULL);
+	}
+	new = malloc(sizeof(listint_t));
+	if (new == NULL)
+		return (NULL);
+	new->n = n;
+	if (idx == 0)
+	{
+		new->next = *head;
+		*head = new;
+		return (new);
+	}
+	new->next = recent->next;
+	recent->next = new;
+	return (new);
 }
-for (node = 0; node < (idx - 1); node++)
-{
-if (copy == NULL || copy->next == NULL)
-return (NULL);
 
-copy = copy->next;
-}
-new->next = copy->next;
-copy->next = new;
-
-return (new);
-}
