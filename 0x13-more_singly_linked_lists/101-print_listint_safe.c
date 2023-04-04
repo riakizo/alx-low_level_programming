@@ -1,53 +1,60 @@
 #include "lists.h"
+#include <stdlib.h>
 #include <stdio.h>
+/**
+ * _r - reallocates memory for an array of pointers
+ * to the nodes in a linked list
+ * @list: the old list to append
+ * @size: size of the new list (always one more than the old list)
+ * @new: new node to add to the list
+ *
+ * Return: pointer to the new list
+ */
+const listint_t **_r(const listint_t **list, size_t size, const listint_t *new)
+{
+	const listint_t **mylist;
+	size_t i;
 
-size_t looped_listint_len(const listint_t *head);
-size_t print_listint_safe(const listint_t *head);
+	mylist = malloc(size * sizeof(listint_t *));
+	if (mylist == NULL)
+	{
+		free(list);
+		exit(98);
+	}
+	for (i = 0; i < size - 1; i++)
+		mylist[i] = list[i];
+	mylist[i] = new;
+	free(list);
+	return (mylist);
+}
 
 /**
- * looped_listint_len - Counts the number of unique nodes
- *                      in a looped listint_t linked list.
- * @head: A pointer to the head of the listint_t to check.
+ * print_listint_safe - prints a listint_t linked list.
+ * @head: pointer to the start of the list
  *
- * Return: If the list is not looped - 0.
- *         Otherwise - the number of unique nodes in the list.
+ * Return: the number of nodes in the list
  */
-size_t looped_listint_len(const listint_t *head)
+size_t print_listint_safe(const listint_t *head)
 {
-	const listint_t *tortoise, *hare;
-	size_t nodes = 1;
+	size_t i, num = 0;
+	const listint_t **list = NULL;
 
-	if (head == NULL || head->next == NULL)
-		return (0);
-
-	tortoise = head->next;
-	hare = (head->next)->next;
-
-	while (hare)
+	while (head != NULL)
 	{
-		if (tortoise == hare)
+		for (i = 0; i < num; i++)
 		{
-			tortoise = head;
-			while (tortoise != hare)
+			if (head == list[i])
 			{
-				nodes++;
-				tortoise = tortoise->next;
-				hare = hare->next;
+				printf("-> [%p] %d\n", (void *)head, head->n);
+				free(list);
+				return (num);
 			}
-
-			tortoise = tortoise->next;
-			while (tortoise != hare)
-			{
-				nodes++;
-				tortoise = tortoise->next;
-			}
-
-			return (nodes);
 		}
-
-		tortoise = tortoise->next;
-		hare = (hare->next)->next;
+		num++;
+		list = _r(list, num, head);
+		printf("[%p] %d\n", (void *)head, head->n);
+		head = head->next;
 	}
-
-	return (0);
+	free(list);
+	return (num);
 }
