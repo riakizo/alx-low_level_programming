@@ -20,6 +20,6 @@ fn = open(filename, O_CREAT | O_RDWR | O_TRUNC, 0600);
 a = write(fn, text_content, height);
 if (fn == -1 || a == -1)
 return (-1);
-exit(fn);
+close(fn);
 return (1);
 }
