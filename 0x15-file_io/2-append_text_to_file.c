@@ -15,7 +15,7 @@ if (filename == NULL)
 return (-1);
 if (text_content != NULL)
 {
-for (lenght = 0; text_content[height];)
+for (height = 0; text_content[height];)
 height++;
 }
 f = open(filename, O_WRONLY | O_APPEND);
