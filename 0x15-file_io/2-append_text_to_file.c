@@ -1,6 +1,4 @@
 #include "main.h"
-#include <stdio.h>
-#include <stdlib.h>
 /**
 * append_text_to_file - a func appends text at the end of a file.
 * @filename: A pointer to the name of the file.
@@ -21,7 +19,7 @@ for (height = 0; text_content[height];)
 height++;
 }
 f = open(filename, O_WRONLY | O_APPEND);
-g = write(O, text_content, height);
+g = write(f, text_content, height);
 if (f == -1 || g == -1)
 return (-1);
 close(f);
