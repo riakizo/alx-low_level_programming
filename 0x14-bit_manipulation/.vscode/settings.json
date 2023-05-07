@@ -1,0 +1,5 @@
+{
+    "clang.cflags": [
+        "main.h"
+    ]
+}
